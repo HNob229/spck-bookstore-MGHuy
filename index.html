@@ -76,7 +76,7 @@
             <a href="./html/create-book.html" class="block text-right">
                 <button class="btn btn-primary">Thêm sách</button>
             </a>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="book-container">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5 w-auto h-auto" id="book-container">
                 <!-- từ dòng 34 - 41 là template mẫu để biến let html trong render-book.js -->
                 <!-- <div class="w-full bg-white rounded-lg shadow hover:shadow-md overflow-hidden">
                     <img src="https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/cach_nau_pho_bo_nam_dinh_0_1d94be153c.png" alt="" />
@@ -85,6 +85,11 @@
                         <p class="text-gray-600">Được làm từ các loại nguyên liệu tự nhiên của VN</p>
                     </div>
                 </div> -->
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="text-3xl font-bold text-red-600" id="book-price-discount"></span>
+
+                    <span class="text-sm font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded border border-red-200" id="book-percent"></span>
+                </div>
             </div>
         </div>
 

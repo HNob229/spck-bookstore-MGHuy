@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Detail-food</title>
+        <link rel="stylesheet" href="./font-awesome-6.5.1-pro-full/css/all.css" />
         <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-        <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <link rel="stylesheet" href="font-awesome-6.5.1-pro-full/css/all.css" />
-        <link rel="stylesheet" href="./css/style.css" />
+
+        <!-- link swiper -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+
+        <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     </head>
-    <body>
+    <body class="bg-amber-50">
+        <!-- Header -->
         <div class="w-full flex h-12 justify-center items-center text-lg sm:text-xl bg-[#EFFFF4] text-green-600 font-semibold">Chào Mừng Bạn Đến Với BookStore</div>
 
         <section class="bg-white">
@@ -49,8 +53,8 @@
                 <div class="w-full lg:w-[25%] flex flex-col justify-center mt-3 lg:mt-0">
                     <div class="flex justify-around lg:justify-between px-4 text-sm sm:text-base lg:text-lg text-[#808089] font-semibold">
                         <a href="index.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-house"></i><span>Trang Chủ</span> </a>
-                        <a href="gt.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-circle-info"></i><span>Giới Thiệu</span> </a>
-                        <a href="login.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-user"></i><span>Tài Khoản</span> </a>
+                        <a href="./html/gt.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-circle-info"></i><span>Giới Thiệu</span> </a>
+                        <a href="./html/login.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-user"></i><span>Tài Khoản</span> </a>
                     </div>
 
                     <div class="flex justify-center items-center mt-3 text-sm sm:text-base px-3">
@@ -71,29 +75,71 @@
                 </div>
             </div>
         </section>
-
-        <section class="flex mt-28">
-            <div class="">
-                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/c2/ec/40/220ea73c60d535c178447f75421f5f9f.png.webp" width="500" height="500" alt="" />
+        <!-- Main -->
+        <section class="bg-[#f5f5fa]">
+            <div class="block text-right pr-40">
+                <button id="btn-delete-book" class="btn btn-error">Xóa sách</button>
             </div>
-            <div class="bg-gray-300 shadow-lg rounded-2xl flex-1">
-                <div class="">
-                    <div class="p-12">
-                        <h4 class="text-3xl font-bold text-gray-800 my-5">Sát nhân liên hoàn kế 1</h4>
-                        <p class="text-gray-600 text-2xl font-bold">Hiểu hơn về cuốn sách Sát nhân liên hoàn kế 1</p>
-                        <p class="mt-3 text-2xl font-sans">
-                            -Bộ Sát Nhân Liên Hoàn Kế – Tập 1 của tác giả Thân Tử Thần là một tác phẩm hình sự hấp dẫn, đưa bạn vào hành trình điều tra đầy kịch tính của vị cảnh sát hình sự Chu Sĩ
-                            Khiêm. Khi đối mặt với một vụ án mạng ghê rợn trong phòng kín, ông nghĩ rằng mình đã tìm ra manh mối để khép lại vụ án. Tuy nhiên, sự thật khủng khiếp hơn nhiều khi những
-                            diễn biến tiếp theo mở ra một chuỗi án mạng liên hoàn mà mọi thứ đều được giăng bẫy.
-                        </p>
-                        <p class="mt-3 text-2xl font-sans">
-                            -Tác phẩm không chỉ mang đến những giây phút nghẹt thở mà còn mở ra những câu hỏi sâu sắc về động lực và bản chất con người. Bạn sẽ phải suy luận và kết nối các manh mối để
-                            tìm ra kẻ đứng sau thế lực vô hình điều khiển mọi chuyện. Liệu bạn có đủ dũng cảm để theo dõi câu chuyện này và tìm ra sự thật? Hãy cùng khám phá những bí mật rùng rợn
-                            trong Bộ Sát Nhân Liên Hoàn Kế – Tập 1!
-                        </p>
+            <div class="py-20 max-w-7xl mx-auto min-h-screen flex justify-center items-center">
+                <div class="flex justify-center items-center gap-10 bg-white p-10 rounded-2xl shadow-lg">
+                    <div class="flex-1 space-y-5">
+                        <a href="/index.html">
+                            <button class="btn btn-primary">Quay về</button>
+                        </a>
+
+                        <h4 class="text-3xl font-bold text-gray-800 mt-5" id="book-name">Đắc Nhân Tâm</h4>
+
+                        <div class="flex items-center gap-3 mb-5">
+                            <span class="text-3xl font-bold text-red-600" id="book-discount">76.000 ₫</span>
+
+                            <span class="text-sm font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded border border-red-200" id="book-percent">-23%</span>
+
+                            <span class="text-gray-400 text-xl line-through" id="book-price-original">98.000 ₫</span>
+                        </div>
+                        <div class="" id="book-description">
+                            <p class="text-gray-600 text-2xl font-bold">Hiểu hơn về cuốn sách Đắc Nhân Tâm</p>
+                            <p class="mt-3 text-lg font-sans">
+                                -Hiểu hơn về cuốn sách Đắc Nhân Tâm Cuốn sách Đắc Nhân Tâm của tác giả Dale Carnegie. Đây là cuốn sách duy nhất về thể loại self-help và liên tục đứng đầu danh mục sách
+                                bán chạy nhất do tờ báo The New York Times bình chọn suốt 10 năm liền. Cuốn sách đầu tiên và hay nhất mọi thời đại. Chúng có ảnh hưởng làm thay đổi cuộc đời của hàng
+                                triệu người trên thế giới.
+                            </p>
+                            <p class="mt-3 text-lg font-sans">
+                                -Nội dung của cuốn sách giúp bạn có cái nhìn khác hơn về khái niệm Đắc Nhân Tâm. Nó không còn là nghệ thuật thu phục lòng người và làm cho tất cả mọi người xung quanh
+                                yêu mến mình. Mà Đắc Nhân Tâm ở đây sẽ có ý nghĩa đó cần được thụ đắc bằng sự hiểu rõ bản thân, thành thật với chính mình.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <img src="https://res.klook.com/image/upload/fl_lossy.progressive,q_85/c_fill,w_1000/v1751995139/xho76hhwpnawqu7afiw3.webp" id="book-image" alt="" class="rounded-lg shadow" />
                     </div>
                 </div>
             </div>
         </section>
+
+        <footer class="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+            <nav>
+                <h6 class="footer-title">Services</h6>
+                <a class="link link-hover">Branding</a>
+                <a class="link link-hover">Design</a>
+                <a class="link link-hover">Marketing</a>
+                <a class="link link-hover">Advertisement</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Company</h6>
+                <a class="link link-hover">About us</a>
+                <a class="link link-hover">Contact</a>
+                <a class="link link-hover">Jobs</a>
+                <a class="link link-hover">Press kit</a>
+            </nav>
+            <nav>
+                <h6 class="footer-title">Legal</h6>
+                <a class="link link-hover">Terms of use</a>
+                <a class="link link-hover">Privacy policy</a>
+                <a class="link link-hover">Cookie policy</a>
+            </nav>
+        </footer>
+
+        <script src="/js/render-detail-book.js"></script>
+        <!-- <script src="/js/delete-book.js"></script> -->
     </body>
 </html>
