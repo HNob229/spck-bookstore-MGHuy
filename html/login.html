@@ -3,31 +3,45 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>login</title>
+        <title>Login - BookStore</title>
         <link rel="stylesheet" href="font-awesome-6.5.1-pro-full/css/all.css" />
         <link rel="stylesheet" href="./css/style.css" />
         <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-
         <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
     </head>
-    <body class="">
-        <form id="login-form" class="h-screen flex justify-center items-center">
-            <fieldset class="fieldset bg-gray-900/40 border-base-300 rounded-box w-xs border border-gray-700 rounded-lg mx-auto p-4">
-                <legend class="fieldset-legend text-gray-300 text-3xl text-center uppercase">Login</legend>
+    <body class="bg-amber-50/50">
+        <form id="login-form" class="h-screen flex justify-center items-center px-4">
+            <fieldset class="fieldset bg-white border-none rounded-2xl w-full max-w-sm mx-auto p-8 shadow-xl shadow-amber-200/50">
+                <legend class="fieldset-legend text-blue-600 text-3xl font-extrabold text-center uppercase tracking-tight mb-6">Đăng Nhập</legend>
 
-                <label class="label">Email</label>
-                <input id="email" type="email" class="input bg-transparent border border-gray-700 validator" placeholder="Email" />
+                <label class="label text-gray-700 font-semibold">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    class="input w-full bg-gray-50 border-gray-200 text-gray-800 focus:border-blue-400 focus:bg-white transition-all duration-200"
+                    placeholder="example@email.com"
+                />
 
-                <label class="label">Password</label>
-                <input id="password" type="password" class="input bg-transparent border border-gray-700 validator" placeholder="Password" />
+                <label class="label text-gray-700 font-semibold mt-3">Mật khẩu</label>
+                <input
+                    id="password"
+                    type="password"
+                    class="input w-full bg-gray-50 border-gray-200 text-gray-800 focus:border-blue-400 focus:bg-white transition-all duration-200"
+                    placeholder="••••••••"
+                />
 
-                <button class="btn btn-neutral mt-4">Login</button>
-                <div class="mt-5 text-center">If you don't have an account, <a href="./register.html" class="text-blue-500 underline">Register</a></div>
+                <button class="btn bg-blue-600 hover:bg-blue-700 border-none text-white font-bold mt-8 w-full shadow-md shadow-blue-200">Đăng Nhập</button>
+
+                <div class="mt-6 text-center text-gray-500 text-sm">
+                    Bạn chưa có tài khoản?
+                    <a href="./register.html" class="text-blue-500 hover:text-blue-700 font-bold underline decoration-1 underline-offset-4">Đăng ký ngay</a>
+                </div>
             </fieldset>
         </form>
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="/js/login.js"></script>
     </body>

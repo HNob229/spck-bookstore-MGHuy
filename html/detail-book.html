@@ -77,8 +77,13 @@
         </section>
         <!-- Main -->
         <section class="bg-[#f5f5fa]">
-            <div class="block text-right pr-40">
-                <button id="btn-delete-book" class="btn btn-error">Xóa sách</button>
+            <div class="flex justify-end">
+                <div class="block text-right pr-10">
+                    <button id="btn-delete-book" class="btn btn-error">Xóa sách</button>
+                </div>
+                <div class="block text-right pr-40">
+                    <a href="edit-book.html" id="btn-edit-book" class="btn btn-error">Sửa sách</a>
+                </div>
             </div>
             <div class="py-20 max-w-7xl mx-auto min-h-screen flex justify-center items-center">
                 <div class="flex justify-center items-center gap-10 bg-white p-10 rounded-2xl shadow-lg">
@@ -97,7 +102,7 @@
                             <span class="text-gray-400 text-xl line-through" id="book-price-original">98.000 ₫</span>
                         </div>
                         <div class="" id="book-description">
-                            <p class="text-gray-600 text-2xl font-bold">Hiểu hơn về cuốn sách Đắc Nhân Tâm</p>
+                            <!-- <p class="text-gray-600 text-2xl font-bold">Hiểu hơn về cuốn sách Đắc Nhân Tâm</p>
                             <p class="mt-3 text-lg font-sans">
                                 -Hiểu hơn về cuốn sách Đắc Nhân Tâm Cuốn sách Đắc Nhân Tâm của tác giả Dale Carnegie. Đây là cuốn sách duy nhất về thể loại self-help và liên tục đứng đầu danh mục sách
                                 bán chạy nhất do tờ báo The New York Times bình chọn suốt 10 năm liền. Cuốn sách đầu tiên và hay nhất mọi thời đại. Chúng có ảnh hưởng làm thay đổi cuộc đời của hàng
@@ -106,7 +111,7 @@
                             <p class="mt-3 text-lg font-sans">
                                 -Nội dung của cuốn sách giúp bạn có cái nhìn khác hơn về khái niệm Đắc Nhân Tâm. Nó không còn là nghệ thuật thu phục lòng người và làm cho tất cả mọi người xung quanh
                                 yêu mến mình. Mà Đắc Nhân Tâm ở đây sẽ có ý nghĩa đó cần được thụ đắc bằng sự hiểu rõ bản thân, thành thật với chính mình.
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                     <div class="flex-1">
@@ -140,6 +145,7 @@
         </footer>
 
         <script src="/js/render-detail-book.js"></script>
-        <!-- <script src="/js/delete-book.js"></script> -->
+        <script src="/js/delete-book.js"></script>
+        <!-- <script src="/js/edit-book.js"></script> -->
     </body>
 </html>
