@@ -16,6 +16,7 @@ btnDelete.addEventListener("click", () => {
         localStorage.setItem("books", JSON.stringify(newBooks));
 
         // 5. Thông báo và chuyển hướng về trang chủ
+
         alert("Xóa thành công!");
         window.location.href = "/index.html";
     }

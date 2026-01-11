@@ -62,6 +62,7 @@ btnEditbook.addEventListener("click", () => {
             id: bookId, // giữ nguyên id
             name: name.value,
             description: description.value,
+            author: author.value,
             money: Math.round(Number(bookOriginalPrice.value)),
             discount: Math.round(Number(bookPercent.value)),
             image: image.value,
