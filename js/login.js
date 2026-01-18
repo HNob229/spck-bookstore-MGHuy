@@ -11,7 +11,7 @@ window.addEventListener("DOMContentLoaded", () => {
         let password = event.target.password.value;
 
         if (!email || !password) {
-            alert("Please fill in all fields!");
+            alert("Hãy điền đầy đủ vào ô thông tin!");
             return;
         }
 

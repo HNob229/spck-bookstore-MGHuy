@@ -33,8 +33,14 @@ btnCreateBook.addEventListener("click", (e) => {
         books.push(newbook);
         localStorage.setItem("books", JSON.stringify(books));
 
-        alert("Đăng bài thành công!");
-        window.location.href = "/index.html";
+        swal.fire({
+            title: "Create Successful!",
+            icon: "success",
+            willClose: () => {
+                //Chuyển hướng về trang chủ
+                window.location.href = "/index.html";
+            },
+        });
     } catch (error) {
         console.error("Lỗi khi lưu dữ liệu:", error);
         alert("Có lỗi xảy ra khi lưu sách!");
