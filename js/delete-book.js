@@ -5,19 +5,23 @@ btnDelete.addEventListener("click", () => {
     const isConfirm = confirm("Bạn có chắc chắn muốn xóa cuốn sách này không?");
 
     if (isConfirm) {
-        // 2. Lấy danh sách từ LocalStorage
+        // Lấy danh sách từ LocalStorage
         let books = JSON.parse(localStorage.getItem("books")) || [];
 
-        // 3. Lọc bỏ cuốn sách có ID trùng với ID hiện tại
-        // Lưu ý: Sử dụng != hoặc !== tùy thuộc kiểu dữ liệu của bạn
+        // Lọc bỏ cuốn sách có ID trùng với ID hiện tại
         const newBooks = books.filter((book) => book.id != bookId);
 
-        // 4. Lưu lại mảng mới vào LocalStorage
+        // Lưu lại mảng mới vào LocalStorage
         localStorage.setItem("books", JSON.stringify(newBooks));
 
-        // 5. Thông báo và chuyển hướng về trang chủ
-
-        alert("Xóa thành công!");
-        window.location.href = "/index.html";
+        // Thông báo và chuyển hướng về trang chủ
+        swal.fire({
+            title: "Deleted Successful!",
+            icon: "success",
+            willClose: () => {
+                //Chuyển hướng về trang chủ
+                window.location.href = "/index.html";
+            },
+        });
     }
 });

@@ -14,7 +14,7 @@ const books = JSON.parse(localStorage.getItem("books")) || [];
 // lấy id từ URL
 const bookId = Number(queryString.split("?")[1]);
 
-// tìm món ăn có id tương ứng
+// tìm quyển sách có id tương ứng
 const book = books.find((f) => f.id === bookId);
 // hiển thị thông tin sách lên các input để chỉnh sửa
 if (book) {
