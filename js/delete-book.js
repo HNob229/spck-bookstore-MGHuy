@@ -1,27 +1,30 @@
-const btnDelete = document.getElementById("btn-delete-book");
-
-btnDelete.addEventListener("click", () => {
-    // Xác nhận trước khi xóa
-    const isConfirm = confirm("Bạn có chắc chắn muốn xóa cuốn sách này không?");
-
-    if (isConfirm) {
-        // Lấy danh sách từ LocalStorage
-        let books = JSON.parse(localStorage.getItem("books")) || [];
-
-        // Lọc bỏ cuốn sách có ID trùng với ID hiện tại
-        const newBooks = books.filter((book) => book.id != bookId);
-
-        // Lưu lại mảng mới vào LocalStorage
-        localStorage.setItem("books", JSON.stringify(newBooks));
-
-        // Thông báo và chuyển hướng về trang chủ
-        swal.fire({
-            title: "Deleted Successful!",
-            icon: "success",
-            willClose: () => {
-                //Chuyển hướng về trang chủ
-                window.location.href = "/index.html";
-            },
-        });
-    }
+const btnDeleteBook = document.getElementById("delete-book");
+btnDeleteBook.addEventListener("click", () => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            db.collection("books")
+                .doc(id)
+                .delete()
+                .then(() => {
+                    Swal.fire("Deleted!", "Your book has been deleted.", "success").then(() => {
+                        window.location.href = "../index.html";
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error deleting document: ", error);
+                    Swal.fire({
+                        title: "Delete book failed",
+                        text: error.message,
+                    });
+                });
+        }
+    });
 });

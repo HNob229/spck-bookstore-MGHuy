@@ -75,10 +75,10 @@
         <section class="bg-[#f5f5fa]">
             <div class="flex justify-end">
                 <div class="block text-right pr-10">
-                    <button id="btn-delete-book" class="btn btn-error">Xóa sách</button>
+                    <button id="delete-book" class="btn btn-error">Xóa sách</button>
                 </div>
                 <div class="block text-right pr-40">
-                    <a href="edit-book.html" id="btn-edit-book" class="btn btn-error">Sửa sách</a>
+                    <a href="edit-book.html" id="edit-book" class="btn btn-error">Sửa sách</a>
                 </div>
             </div>
             <div class="py-20 max-w-7xl mx-auto min-h-screen flex justify-center items-center">
@@ -139,10 +139,24 @@
                 <a class="link link-hover">Cookie policy</a>
             </nav>
         </footer>
+
+        <!-- link CDN của firebase -->
+        <!-- chữ defer có nghĩa là phải tải xong script ở trên thì mới tiếp tục xuống dưới tuần tự -->
+        <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+        <!-- cấu hình nhận diện chủ sở hữu config -->
+        <script defer src="../firebase.config.js"></script>
+
+        <script defer src="main.js"></script>
+
+        <script defer src="/js/checkLogin.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="/js/render-detail-book.js"></script>
-        <script src="/js/delete-book.js"></script>
+        <script defer src="../js/check-login.js"></script>
+        <script defer src="../js/render-detail-book.js"></script>
+        <script defer src="../js/delete-book.js"></script>
         <!-- <script src="/js/edit-book.js"></script> -->
     </body>
 </html>

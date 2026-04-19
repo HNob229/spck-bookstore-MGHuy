@@ -1,39 +1,55 @@
-const bookName = document.getElementById("book-name");
-const bookOriginalPrice = document.getElementById("book-price-original");
-const bookDiscountPrice = document.getElementById("book-discount");
-const bookPercent = document.getElementById("book-percent");
-const bookDesc = document.getElementById("book-description");
-const bookImage = document.getElementById("book-image");
-const href = document.getElementById("btn-edit-book");
+const name = document.getElementById("book-name");
+const price = document.getElementById("book-price-original");
+const image = document.getElementById("book-image");
+const description = document.getElementById("book-description");
+const discount = document.getElementById("book-discount");
+const btnEditBook = document.getElementById("edit-book");
 
-// console.log(bookName, bookOriginalPrice, bookDiscountPrice, bookPercent, bookDesc, bookImage);
+console.log({ name, price, image, description, discount });
 
-const params = window.location.search;
-const bookId = params.split("?")[1];
+// Cách lấy ID an toàn
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
+console.log(id);
 
-const books = JSON.parse(localStorage.getItem("books")) || [];
-const book = books.find((b) => b.id == bookId);
-console.log(book);
+const db = firebase.firestore();
 
-const formatVND = (value) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(value);
+if (id) {
+    db.collection("books")
+        .doc(id)
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                const book = doc.data();
 
-if (!book) {
-    alert("Không tìm thấy sách!");
-    window.location.href = "/index.html";
-} else {
-    const originalPrice = Number(book.money) || 0;
-    console.log("originalPrice:", originalPrice);
-    const discountPercent = Number(book.discount) || 0;
-    const discountedPrice = Math.round(originalPrice * (1 - discountPercent / 100));
-    href.href = `./edit-book.html?${book.id}`;
+                // Hiển thị dữ liệu
+                name.innerText = book.name;
+                description.innerText = book.description || "Không có mô tả.";
+                image.src = book.image;
 
-    // Kiểm tra và gán dữ liệu
-    if (bookName) bookName.innerText = book.name;
+                // Xử lý giá và giảm giá (giả sử field là 'money')
+                if (book.discount > 0) {
+                    const discounted = Math.round(book.money - (book.money * book.discount) / 100);
+                    price.innerText = book.toLocaleString("vi-VN") + "₫";
+                    discount.innerText = `-${book.discount}%`;
+                    discount.style.display = "inline-block"; // Hiện tag giảm giá
+                } else {
+                    price.innerText = (book.money || 0).toLocaleString("vi-VN") + "₫";
+                    discount.style.display = "none"; // Ẩn tag giảm giá nếu không có
+                }
 
-    if (bookOriginalPrice) bookOriginalPrice.innerText = formatVND(originalPrice);
-    if (bookDiscountPrice) bookDiscountPrice.innerText = formatVND(discountedPrice);
-    if (bookPercent) bookPercent.innerText = `-${discountPercent}%`;
-    console.log(book.description);
-    if (bookDesc) bookDesc.innerText = book.description;
-    if (bookImage) bookImage.src = book.image;
+                // Cập nhật link cho nút sửa (thêm id= để đồng bộ)
+                btnEditBook.href = `./edit-book.html?id=${id}`;
+            } else {
+                throw new Error("Sách không tồn tại trong hệ thống.");
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            Swal.fire({
+                title: "Lỗi!",
+                text: error.message || "Không thể tải chi tiết sách.",
+                icon: "error",
+            });
+        });
 }

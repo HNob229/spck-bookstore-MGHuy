@@ -1,70 +1,77 @@
-// Chờ cho tới khi trang được tải xong hết thì mới thực hiện câu lệnh bên trong
-window.addEventListener("DOMContentLoaded", () => {
-    const registerForm = document.getElementById("register-form");
-    console.log(registerForm);
+const formRegister = document.getElementById("form-register");
 
-    // Lắng nghe sự kiện submit (gửi đi) của form đăng ký
-    registerForm.addEventListener("submit", (event) => {
-        // Ngăn chặn hành vi mặc định của form (tải lại trang)
-        event.preventDefault();
-        let email = event.target.email.value;
-        let password = event.target.password.value;
-        let repeatPassword = event.target.repeatPassword.value;
-        console.log(email, password, repeatPassword);
+formRegister.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(formRegister);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const repeatPassword = formData.get("repeat_password");
+    console.log({ email, password, repeatPassword });
 
-        //regex chữ hoa
-        const uppercaseRegex = /[A-Z]/;
-        const lowercaseRegex = /[a-z]/;
-        const numberRegex = /[0-9]/;
+    if (!email.trim()) {
+        swal.fire({
+            title: "Error",
+            text: "Email is required!",
+            willClose: () => {
+                document.getElementById("email").focus();
+            },
+        });
+        return;
+    }
 
-        //Kiểm tra độ dài mật khẩu
-        if (password.length < 6) {
-            alert("Password must be at least 6 characters long!");
-            return;
-        }
+    if (!password.trim()) {
+        swal.fire({
+            title: "Error",
+            text: "Password is required!",
+            willClose: () => {
+                document.getElementById("password").focus();
+            },
+        });
+        return;
+    }
 
-        //Kiểm tra chữ hoa
-        if (!uppercaseRegex.test(password)) {
-            alert("Password must contain at least one uppercase letter!");
-            return;
-        }
+    if (password !== repeatPassword) {
+        swal.fire({
+            title: "Error",
+            text: "Passwords do not match!",
+            willClose: () => {
+                document.getElementById("repeat_password").focus();
+            },
+        });
+        return;
+    }
 
-        //Kiểm tra chữ thường
-        if (!lowercaseRegex.test(password)) {
-            alert("Password must contain at least one lowercase letter!");
-            return;
-        }
-
-        //Kiểm tra số
-        if (!numberRegex.test(password)) {
-            alert("Password must contain at least one number!");
-            return;
-        }
-
-        // Kiểm tra xem mật khẩu và nhập lại mật khẩu có giống nhau không
-        if (password !== repeatPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-
-        //Lấy ra dữ liệu trong localStorage
-        //Chuyển đổi Chuỗi JSON thành mảng đối tượng
-        let users = JSON.parse(localStorage.getItem("users")) || [];
-
-        //Kiểm tra email đã tồn tại chưa
-        let userExists = users.some((user) => user.email === email);
-        if (userExists) {
-            alert("Email already registered!");
-            return;
-        }
-
-        //Thêm người dùng mới vào mảng
-        users.push({ email: email, password: password });
-        //Lưu mảng người dùng vào localStorage dưới dạng chuỗi JSON
-        localStorage.setItem("users", JSON.stringify(users));
-
-        //nếu tất cả đều hợp lệ, chuyển hướng đến trang đăng nhập
-        alert("Registration successful!");
-        window.location.href = "/html/login.html";
+    swal.fire({
+        icon: "loading",
+        title: "Creating user...",
+        showConfirmButton: false,
     });
+    firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            console.log(user);
+            swal.fire({
+                title: "Success",
+                text: "Register successfully!",
+                icon: "success",
+                willClose: () => {
+                    window.location.href = "./login.html";
+                },
+            });
+            // ...
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.error({ errorCode, errorMessage });
+            swal.fire({
+                title: "Register Failed",
+                text: errorMessage,
+                icon: "error",
+            });
+            // ..
+        });
 });
