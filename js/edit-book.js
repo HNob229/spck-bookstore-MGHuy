@@ -3,9 +3,10 @@ const price = document.getElementById("book-price-original");
 const image = document.getElementById("book-image");
 const description = document.getElementById("book-description");
 const author = document.getElementById("book-author");
-const discount = document.getElementById("book-price-discount");
+const discount = document.getElementById("book-discount");
 
-const id = window.location.search.slice(1);
+const id = window.location.search.split("id=")[1];
+console.log(id);
 
 const db = firebase.firestore();
 
@@ -14,8 +15,11 @@ db.collection("books")
     .get()
     .then((doc) => {
         const book = doc.data();
+        console.log(book);
+        console.log(name.value);
+        console.log(book.name);
         name.value = book.name;
-        price.value = book.price;
+        price.value = book.money;
         image.value = book.image;
         description.value = book.description;
         author.value = book.author;
@@ -30,18 +34,18 @@ db.collection("books")
         });
     });
 
-const formAddProduct = document.getElementById("form-create-book");
-
-formAddProduct.addEventListener("submit", (e) => {
+const formEditBook = document.getElementById("form-edit-book");
+console.log("hihi");
+formEditBook.addEventListener("submit", (e) => {
     e.preventDefault();
-    const formData = new FormData(formAddProduct);
+    const formData = new FormData(formEditBook);
     const name = formData.get("book-name");
     const money = formData.get("book-price-original");
     const image = formData.get("book-image");
     const description = formData.get("book-description");
     const author = formData.get("book-author");
-    const discount = formData.get("book-price-discount");
-
+    const discount = formData.get("book-discount");
+    console.log(document.getElementById("book-discount").value);
     if (!name.trim()) {
         Swal.fire({
             title: "Error",
@@ -96,13 +100,14 @@ formAddProduct.addEventListener("submit", (e) => {
         });
         return;
     }
+    console.log(discount);
 
-    if (!discount.trim()) {
+    if (discount.value < 0 || discount.value > 100) {
         Swal.fire({
             title: "Error",
-            text: "Book discount is required!",
+            text: "Book discount must be between 0 and 100!",
             willClose: () => {
-                document.getElementById("book-price-discount").focus();
+                document.getElementById("book-discount").focus();
             },
         });
         return;
@@ -115,16 +120,17 @@ formAddProduct.addEventListener("submit", (e) => {
         showConfirmButton: false,
     });
     const db = firebase.firestore();
+    console.log(id);
     // Add a new document with a generated id.
     const newBook = { name, money, image, description, author, discount };
     console.log(newBook);
     db.collection("books")
-        .add(newBook)
+        .doc(id)
+        .update(newBook)
         .then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
             Swal.fire({
                 title: "Success",
-                text: "Book added successfully!",
+                text: "Book updated successfully!",
                 willClose: () => {
                     window.location.href = "../index.html";
                 },

@@ -29,10 +29,13 @@ if (id) {
 
                 // Xử lý giá và giảm giá (giả sử field là 'money')
                 if (book.discount > 0) {
+                    console.log(book);
+                    console.log(price);
                     const discounted = Math.round(book.money - (book.money * book.discount) / 100);
-                    price.innerText = book.toLocaleString("vi-VN") + "₫";
+                    price.innerText = book.money.toLocaleString("vi-VN") + "₫";
                     discount.innerText = `-${book.discount}%`;
                     discount.style.display = "inline-block"; // Hiện tag giảm giá
+                    document.getElementById("book-discount").innerText = discounted.toLocaleString("vi-VN") + "₫";
                 } else {
                     price.innerText = (book.money || 0).toLocaleString("vi-VN") + "₫";
                     discount.style.display = "none"; // Ẩn tag giảm giá nếu không có
