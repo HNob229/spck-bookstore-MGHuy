@@ -33,8 +33,8 @@ formLogin.addEventListener("submit", (e) => {
             var errorMessage = error.message;
             console.error({ errorCode, errorMessage });
             swal.fire({
-                title: "Error",
-                text: errorMessage,
+                title: "Đăng nhập thất bại!",
+                text: "Mật khẩu hoặc email không đúng!",
                 icon: "error",
             });
             // ..

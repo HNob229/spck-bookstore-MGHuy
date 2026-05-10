@@ -29,7 +29,7 @@
                             </svg>
                         </div>
                         <input type="text" placeholder="Tìm kiếm sách..." class="input w-full h-10 sm:h-12 text-[16px] rounded-lg focus:outline-none" id="search-input" />
-                        <button class="hidden sm:flex w-[20%] justify-center items-center text-blue-600 font-bold hover:bg-slate-200 rounded-r-md transition duration-300">Tìm</button>
+                        <!-- <button class="hidden sm:flex w-[20%] justify-center items-center text-blue-600 font-bold hover:bg-slate-200 rounded-r-md transition duration-300">Tìm</button> -->
                     </div>
 
                     <div class="hidden md:flex flex-wrap justify-center lg:justify-start">
@@ -46,11 +46,18 @@
                     </div>
                 </div>
 
-                <div class="w-full lg:w-[25%] flex flex-col justify-center mt-3 lg:mt-0">
+                <div class="w-full lg:w-[37%] flex flex-col justify-center mt-3 lg:mt-0">
                     <div class="flex justify-around lg:justify-between px-4 text-sm sm:text-base lg:text-lg text-[#808089] font-semibold">
                         <a href="index.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-house"></i><span>Trang Chủ</span> </a>
                         <a href="./html/gt.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-circle-info"></i><span>Giới Thiệu</span> </a>
-                        <a href="./html/login.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-user"></i><span>Tài Khoản</span> </a>
+                        <!-- <a href="./html/login.html" class="flex items-center space-x-1 hover:text-blue-500"> <i class="fa-solid fa-user"></i><span>Tài Khoản</span> </a> -->
+                        <div class="flex items-center space-x-1" id="profile">
+                            <p id="display-name" class="text-blue-400"></p>
+                            <button class="btn btn-secondary" id="btn-logout">logout</button>
+                        </div>
+                        <a href="./html/login.html">
+                            <button class="btn btn-primary" id="btn-login">Login</button>
+                        </a>
                     </div>
 
                     <div class="flex justify-center items-center mt-3 text-sm sm:text-base px-3">
@@ -74,7 +81,7 @@
         <div class="py-20 max-w-7xl mx-auto min-h-screen">
             <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sản Phẩm Nổi Bật</h3>
             <a href="./html/create-book.html" class="block text-right">
-                <button class="btn btn-primary">Thêm sách</button>
+                <button class="btn btn-primary my-3">Thêm sách</button>
             </a>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-5 w-auto h-auto" id="book-container">
                 <!-- từ dòng 34 - 41 là template mẫu để biến let html trong render-book.js -->
@@ -127,7 +134,6 @@
 
         <script defer src="main.js"></script>
 
-        <script defer src="/js/checkLogin.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script defer src="./js/check-login.js"></script>

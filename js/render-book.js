@@ -23,7 +23,7 @@ const renderUI = (books) => {
 
             return `
             <a href="./html/detail-book.html?id=${book.id}" class="w-full bg-white rounded-lg shadow hover:shadow-md overflow-hidden flex flex-col">
-                <img src="${book.image}" alt="${book.name}" class="h-48 w-full object-cover" />
+                <img src="${book.image}" alt="${book.name}" class="h-72 w-full object-cover" />
                 <div class="p-5 flex-1 flex flex-col justify-between">
                     <div>
                         <span class="block overflow-hidden line-clamp-1 text-[#808089] text-[12px] uppercase font-normal mb-1"> 
